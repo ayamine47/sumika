@@ -25,7 +25,14 @@
         devShell =
           with pkgs;
           mkShell {
-            buildInputs = with pkgs; [ go ];
+            buildInputs = with pkgs; [
+              go
+              gopls
+              gotools
+              delve
+            ];
+
+            hardeningDisable = [ "fortify" ];
           };
       }
     );

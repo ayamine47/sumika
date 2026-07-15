@@ -1,4 +1,23 @@
 discord:
   token: YOUR_TOKEN_HERE
-  status: sumika is running! | P-cchi~
+  status: s. | sumika is running! | P-cchi~
+guild:
+  prefix: s.
   channel: YOUR_CHANNEL_HERE
+nextcloud:
+  enable: false
+  url: YOUR_NEXTCLOUD_WEBDAV_URL_HERE
+  username: YOUR_USERNAME_HERE
+  password: YOUR_APP_PASSWORD_HERE
+  path: YOUR_PATH_TO_SAVE_FILES_HERE
+googledrive:
+  enable: false
+  secret_file: YOUR_SECRET_FILE_PATH_HERE
+  token_file: YOUR_TOKEN_FILE_PATH_HERE
+url_whitelist:
+  - youtube.com
+  - www.youtube.com
+  - m.youtube.com
+  - youtu.be
+  - www.nicovideo.jp
+  - www.nicovideo.gay
