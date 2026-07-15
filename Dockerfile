@@ -7,6 +7,6 @@ WORKDIR /go/src/sumika
 RUN go build .
 
 FROM alpine
-COPY --from=build /go/src/sumika /bin/sumika
+COPY --from=build /go/src/sumika/sumika /bin/sumika
 WORKDIR /data
 CMD sumika
