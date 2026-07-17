@@ -7,6 +7,7 @@ WORKDIR /go/src/sumika
 RUN go build .
 
 FROM alpine
+RUN apk add --no-cache ffmpeg
 COPY --from=build /go/src/sumika/sumika /bin/sumika
 WORKDIR /data
 CMD sumika
