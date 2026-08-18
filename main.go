@@ -15,6 +15,9 @@ import (
 )
 
 func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
+	defer cancel()
+
 	ytdlp.MustInstall(context.TODO(), nil)
 
 	if config.CurrentConfig.NextCloud.Enable {
@@ -25,7 +28,7 @@ func main() {
 		cloud.InitGoogleDrive()
 	}
 
-	var token = config.CurrentConfig.Discord.Token
+	token := config.CurrentConfig.Discord.Token
 	discord, err := discordgo.New("Bot " + token)
 	if err != nil {
 		log.Fatal("Failed to create Bot")
