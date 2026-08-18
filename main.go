@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/lrstanley/go-ytdlp"
@@ -18,7 +19,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 	defer cancel()
 
-	ytdlp.MustInstall(context.TODO(), nil)
+	ytdlp.MustInstall(ctx, nil)
 
 	if config.CurrentConfig.NextCloud.Enable {
 		cloud.InitNextCloud()
