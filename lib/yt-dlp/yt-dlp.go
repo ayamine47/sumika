@@ -14,7 +14,7 @@ import (
 func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 	cookie := getCookiePath(u)
 
-	metaDl := ytdlp.New().SkipDownload().DumpJSON().JsRuntimes("nodejs")
+	metaDl := ytdlp.New().SkipDownload().DumpJSON().JsRuntimes("node")
 
 	if cookie != "" {
 		metaDl = metaDl.Cookies(cookie)
@@ -35,7 +35,7 @@ func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 
 	fileName := utils.SanitizeFileName(meta.ID + "_" + meta.Title)
 
-	dl := ytdlp.New().FormatSort("res,ext:mp4:m4a").Output(fileName + ".%(ext)s").JsRuntimes("nodejs")
+	dl := ytdlp.New().FormatSort("res,ext:mp4:m4a").Output(fileName + ".%(ext)s").JsRuntimes("node")
 	if cookie != "" {
 		dl = dl.Cookies(cookie)
 	}
