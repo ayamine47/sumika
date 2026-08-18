@@ -14,7 +14,7 @@ import (
 func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 	cookie := getCookiePath(u)
 
-	metaDl := ytdlp.New().SkipDownload().DumpJSON()
+	metaDl := ytdlp.New().SkipDownload().DumpJSON().JsRuntimes("deno:/usr/local/bin/deno")
 
 	if cookie != "" {
 		metaDl = metaDl.Cookies(cookie)
@@ -35,7 +35,7 @@ func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 
 	fileName := utils.SanitizeFileName(meta.ID + "_" + meta.Title)
 
-	dl := ytdlp.New().FormatSort("res,ext:mp4:m4a").Output(fileName + ".%(ext)s")
+	dl := ytdlp.New().FormatSort("res,ext:mp4:m4a").Output(fileName + ".%(ext)s").JsRuntimes("deno:/usr/local/bin/deno")
 	if cookie != "" {
 		dl = dl.Cookies(cookie)
 	}
@@ -45,7 +45,6 @@ func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 		embed.SendErrorEmbed(msgInfo, "Failed to download video: "+"`"+u.String()+"`"+"\n"+err.Error())
 		return
 	}
-
 
 	ffmpeg.ReEncodeVideo(fileName, msgInfo)
 }
