@@ -12,9 +12,8 @@ FROM alpine
 RUN apk add --no-cache \
     ffmpeg \
     ca-certificates \
-    libgcc \
-    libstdc++
-COPY --from=deno /deno /usr/local/bin/deno
+    python3 \
+    nodejs
 COPY --from=build /go/src/sumika/sumika /bin/sumika
 WORKDIR /data
 CMD sumika
