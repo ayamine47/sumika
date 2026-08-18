@@ -6,8 +6,15 @@ ENV CGO_ENABLED 0
 WORKDIR /go/src/sumika
 RUN go build .
 
+FROM denoland/deno:bin AS deno
+
 FROM alpine
-RUN apk add --no-cache ffmpeg
+RUN apk add --no-cache \
+    ffmpeg \
+    ca-certificates \
+    libgcc \
+    libstdc++
+COPY --from=deno /deno /usr/local/bin/deno
 COPY --from=build /go/src/sumika/sumika /bin/sumika
 WORKDIR /data
 CMD sumika

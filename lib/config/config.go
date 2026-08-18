@@ -10,11 +10,11 @@ import (
 
 type Config struct {
 	Discord struct {
-		Token   string
-		Status  string
+		Token  string
+		Status string
 	}
 	Guild struct {
-		Prefix string
+		Prefix  string
 		Channel string
 	}
 	NextCloud struct {
@@ -29,7 +29,8 @@ type Config struct {
 		SecretFile string
 		TokenFile  string
 	}
-	UrlWhiteList []string `yaml:"url_whitelist"`
+	UrlWhiteList []string          `yaml:"url_whitelist"`
+	CookieList   map[string]string `yaml:"cookie_list"`
 }
 
 const configFile = "./config.yaml"

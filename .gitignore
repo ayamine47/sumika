@@ -42,3 +42,6 @@ config.yaml
 
 # videos
 *.mp4
+
+# cookies
+cookies/

@@ -21,3 +21,12 @@ url_whitelist:
   - youtu.be
   - www.nicovideo.jp
   - www.nicovideo.gay
+  - sp.nicovideo.jp
+cookie_list:
+  youtube.com: /app/cookies/youtube.txt
+  www.youtube.com: /app/cookies/youtube.txt
+  m.youtube.com: /app/cookies/youtube.txt
+  youtu.be: /app/cookies/youtube.txt
+  www.nicovideo.jp: /app/cookies/niconico.txt
+  www.nicovideo.gay: /app/cookies/niconico.txt
+  sp.nicovideo.jp: /app/cookies/niconico.txt

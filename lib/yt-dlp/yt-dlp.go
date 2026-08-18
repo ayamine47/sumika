@@ -12,7 +12,14 @@ import (
 )
 
 func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
+	cookie := getCookiePath(u)
+
 	metaDl := ytdlp.New().SkipDownload().DumpJSON()
+
+	if cookie != "" {
+		metaDl = metaDl.Cookies(cookie)
+	}
+
 	metaRes, err := metaDl.Run(context.TODO(), u.String())
 	if err != nil {
 		embed.SendErrorEmbed(msgInfo, "Failed fetch metadata: "+"`"+u.String()+"`"+"\n"+err.Error())
@@ -20,14 +27,18 @@ func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 	}
 
 	var meta utils.VideoMetadata
-
 	err = json.Unmarshal([]byte(metaRes.Stdout), &meta)
 	if err != nil {
 		embed.SendErrorEmbed(msgInfo, "Failed parse metadata: "+"`"+u.String()+"`"+"\n"+err.Error())
 		return
 	}
 
-	dl := ytdlp.New().FormatSort("res,ext:mp4:m4a").Output("%(id)s_%(title)s.%(ext)s")
+	fileName := utils.SanitizeFileName(meta.ID + "_" + meta.Title)
+
+	dl := ytdlp.New().FormatSort("res,ext:mp4:m4a").Output(fileName + ".%(ext)s")
+	if cookie != "" {
+		dl = dl.Cookies(cookie)
+	}
 
 	_, err = dl.Run(context.TODO(), u.String())
 	if err != nil {
@@ -35,7 +46,6 @@ func GetVideo(u *url.URL, msgInfo *embed.MsgInfo) {
 		return
 	}
 
-	fileName := meta.ID + "_" + meta.Title
 
 	ffmpeg.ReEncodeVideo(fileName, msgInfo)
 }
